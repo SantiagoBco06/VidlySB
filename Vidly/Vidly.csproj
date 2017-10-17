@@ -277,6 +277,10 @@
     <Compile Include="Migrations\201710111805573_ChangeAttributeGenreTypeToMovie1.Designer.cs">
       <DependentUpon>201710111805573_ChangeAttributeGenreTypeToMovie1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710171725225_AddUninitializedChanges.cs" />
+    <Compile Include="Migrations\201710171725225_AddUninitializedChanges.Designer.cs">
+      <DependentUpon>201710171725225_AddUninitializedChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GenreType.cs" />
     <Compile Include="Models\Min18YearsIfAMember.cs" />
@@ -658,6 +662,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710111805573_ChangeAttributeGenreTypeToMovie1.resx">
       <DependentUpon>201710111805573_ChangeAttributeGenreTypeToMovie1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710171725225_AddUninitializedChanges.resx">
+      <DependentUpon>201710171725225_AddUninitializedChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
