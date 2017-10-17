@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Vidly.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+@Html.ActionLink("New Customer", "New", null, new { @class = "btn btn-primary", @style = "display:inline;float:right;" } )
+
+@*@if( !Model.Any())
+{
+    <text>Don't exist a register of Customer.</text>
+}
+else
+{*@
+    <table id="customers" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customers</th>
+                <th>Discount Rate</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach ( var customer in Model )
+            {
+            <tr>
+                <td>@Html.ActionLink(customer.Name, "Edit", new { id = customer.Id } )</td>
+                <td>@customer.MembershipType.Name</td>
+                <td>
+                    <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button>
+                </td>
+            </tr>
+            }*@
+        </tbody>
+    </table> 
+
+@*}*@
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#customers").DataTable({
+                    ajax: {
+                        url: "/api/customer",
+                        dataSrc:"",
+                    },
+                    columns: [
+                        {
+                            data: "name",
+                            render: function (data, type, customer) {
+                                return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                            }
+                        },
+                        {
+                            data: "membershipType.name",
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class = 'btn-link js-delete' data-customer-id = "  + data + ">Delete</button>";
+                            }
+                        }
+                    ],
+            });
+
+            $("#customers").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Estas seguro que deseas eliminar este cliente?",
+                        function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/customer/" + button.attr("data-customer-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
+            });
+        }
+             
+    ); 
+
+
+    </script>
+}
