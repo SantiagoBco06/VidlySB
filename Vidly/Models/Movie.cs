@@ -29,6 +29,10 @@ namespace Vidly.Models
         [Display(Name = "In Stock")]
         public byte NumberInStock { get; set; }
         
+        [Range(0, 20, ErrorMessage = "Se puede agregar mínimo 1 unidad y máximo 20 unidades.")]
+        [Display(Name = "In Stock")]
+        public byte NumberAvailable { get; set; }
+
         public GenreType GenreType { get; set; }
 
         [Display(Name = "Genre Type")]
